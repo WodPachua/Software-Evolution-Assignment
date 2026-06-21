@@ -21,7 +21,9 @@ def print_menu():
     print("Task Manager")
     print("1. Add task")
     print("2. List tasks")
-    print("3. Exit")
+    print("3. Complete task")
+    print("4. Delete task")
+    print("5. Exit")
 
 
 def add_task(tasks, title):
@@ -39,6 +41,18 @@ def list_tasks(tasks):
         print(f"{i}. [{status}] {t['title']}")
 
 
+def complete_task(tasks, index):
+    tasks[index]["done"] = True
+    save_tasks(tasks)
+    print(f"Completed: {tasks[index]['title']}")
+
+
+def delete_task(tasks, index):
+    removed = tasks.pop(index)
+    save_tasks(tasks)
+    print(f"Deleted: {removed['title']}")
+
+
 def main():
     tasks = load_tasks()
     while True:
@@ -49,6 +63,10 @@ def main():
         elif choice == "2":
             list_tasks(tasks)
         elif choice == "3":
+            complete_task(tasks, int(input("Task number: ")) - 1)
+        elif choice == "4":
+            delete_task(tasks, int(input("Task number: ")) - 1)
+        elif choice == "5":
             break
         else:
             print("Invalid option")
