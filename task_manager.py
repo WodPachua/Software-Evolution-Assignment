@@ -27,6 +27,10 @@ def print_menu():
 
 
 def add_task(tasks, title):
+    title = title.strip()
+    if not title:
+        print("Task title cannot be empty.")
+        return
     tasks.append({"title": title, "done": False})
     save_tasks(tasks)
     print(f"Added: {title}")
