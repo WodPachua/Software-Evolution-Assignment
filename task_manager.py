@@ -23,7 +23,8 @@ def print_menu():
     print("2. List tasks")
     print("3. Complete task")
     print("4. Delete task")
-    print("5. Exit")
+    print("5. Search tasks")
+    print("6. Exit")
 
 
 def add_task(tasks, title, priority="medium"):
@@ -45,6 +46,17 @@ def list_tasks(tasks):
     for i, t in enumerate(tasks, 1):
         status = "x" if t["done"] else " "
         print(f"{i}. [{status}] {t['title']}")
+
+
+def search_tasks(tasks, keyword):
+    keyword = keyword.lower().strip()
+    matches = [t for t in tasks if keyword in t["title"].lower()]
+    if not matches:
+        print("No matching tasks.")
+        return
+    for t in matches:
+        status = "x" if t["done"] else " "
+        print(f"[{status}] {t['title']} ({t.get('priority','medium')})")
 
 
 def complete_task(tasks, index):
@@ -73,6 +85,8 @@ def main():
         elif choice == "4":
             delete_task(tasks, int(input("Task number: ")) - 1)
         elif choice == "5":
+            search_tasks(tasks, input("Search keyword: "))
+        elif choice == "6":
             break
         else:
             print("Invalid option")
