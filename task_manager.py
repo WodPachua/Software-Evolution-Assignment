@@ -18,12 +18,15 @@ def save_tasks(tasks):
 
 
 def print_menu():
-    print("Task Manager")
-    print("1. Add task")
-    print("2. List tasks")
-    print("3. Complete task")
-    print("4. Delete task")
-    print("5. Exit")
+    print("=" * 32)
+    print("         TASK MANAGER")
+    print("=" * 32)
+    print("  [1] Add task")
+    print("  [2] List tasks")
+    print("  [3] Complete task")
+    print("  [4] Delete task")
+    print("  [5] Exit")
+    print("=" * 32)
 
 
 def add_task(tasks, title):
