@@ -18,13 +18,16 @@ def save_tasks(tasks):
 
 
 def print_menu():
-    print("Task Manager")
-    print("1. Add task")
-    print("2. List tasks")
-    print("3. Complete task")
-    print("4. Delete task")
-    print("5. Search tasks")
-    print("6. Exit")
+    print("=" * 32)
+    print("         TASK MANAGER")
+    print("=" * 32)
+    print("  [1] Add task")
+    print("  [2] List tasks")
+    print("  [3] Complete task")
+    print("  [4] Delete task")
+    print("  [5] Search tasks")
+    print("  [6] Exit")
+    print("=" * 32)
 
 
 def add_task(tasks, title, priority="medium"):
@@ -44,8 +47,8 @@ def list_tasks(tasks):
         print("No tasks yet.")
         return
     for i, t in enumerate(tasks, 1):
-        status = "x" if t["done"] else " "
-        print(f"{i}. [{status}] {t['title']}")
+        icon = "[done]" if t["done"] else "[ todo ]"
+        print(f"  {i:>2}. {icon}  {t['title']}")
 
 
 def search_tasks(tasks, keyword):
