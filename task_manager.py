@@ -25,18 +25,21 @@ def print_menu():
     print("  [2] List tasks")
     print("  [3] Complete task")
     print("  [4] Delete task")
-    print("  [5] Exit")
+    print("  [5] Search tasks")
+    print("  [6] Exit")
     print("=" * 32)
 
 
-def add_task(tasks, title):
+def add_task(tasks, title, priority="medium"):
     title = title.strip()
     if not title:
         print("Task title cannot be empty.")
         return
-    tasks.append({"title": title, "done": False})
+    if priority not in ("low", "medium", "high"):
+        priority = "medium"
+    tasks.append({"title": title, "done": False, "priority": priority})
     save_tasks(tasks)
-    print(f"Added: {title}")
+    print(f"Added ({priority}): {title}")
 
 
 def list_tasks(tasks):
@@ -46,6 +49,17 @@ def list_tasks(tasks):
     for i, t in enumerate(tasks, 1):
         icon = "[done]" if t["done"] else "[ todo ]"
         print(f"  {i:>2}. {icon}  {t['title']}")
+
+
+def search_tasks(tasks, keyword):
+    keyword = keyword.lower().strip()
+    matches = [t for t in tasks if keyword in t["title"].lower()]
+    if not matches:
+        print("No matching tasks.")
+        return
+    for t in matches:
+        status = "x" if t["done"] else " "
+        print(f"[{status}] {t['title']} ({t.get('priority','medium')})")
 
 
 def complete_task(tasks, index):
@@ -66,7 +80,7 @@ def main():
         print_menu()
         choice = input("Choose an option: ").strip()
         if choice == "1":
-            add_task(tasks, input("Task title: "))
+            add_task(tasks, input("Task title: "), input("Priority (low/medium/high): "))
         elif choice == "2":
             list_tasks(tasks)
         elif choice == "3":
@@ -74,6 +88,8 @@ def main():
         elif choice == "4":
             delete_task(tasks, int(input("Task number: ")) - 1)
         elif choice == "5":
+            search_tasks(tasks, input("Search keyword: "))
+        elif choice == "6":
             break
         else:
             print("Invalid option")
