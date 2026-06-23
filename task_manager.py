@@ -44,8 +44,8 @@ def list_tasks(tasks):
         print("No tasks yet.")
         return
     for i, t in enumerate(tasks, 1):
-        status = "x" if t["done"] else " "
-        print(f"{i}. [{status}] {t['title']}")
+        icon = "[done]" if t["done"] else "[ todo ]"
+        print(f"  {i:>2}. {icon}  {t['title']}")
 
 
 def complete_task(tasks, index):
